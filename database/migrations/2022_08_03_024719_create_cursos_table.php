@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->comment('contiene le nombre del curso');
             $table->string('descripcion')->comment('contiene la descripcion del curso');
+            $table->text('categoria')->comment('categoria de los curtsos');
             $table->timestamps();
         });
     }
