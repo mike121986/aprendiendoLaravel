@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+// importamos los mutadores(estos sirven para unificar las insercionse y evitar que metan datos como quieran)
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -41,4 +44,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function name(): Attribute
+    {
+        return new Attribute(
+            /* // accesores: estos transforman nuestra cadena antes de enviarlo
+            get: function($value){
+                return ucwords($value);
+            },
+            // mutadores este transforma
+            set: function($value){
+                return strtolower($value);
+            } */
+
+            //con funcion de flecha de php
+            get: fn($value)=> ucwords($value),
+            set: fn($value)=> strtolower($value)
+        );
+    }
 }
