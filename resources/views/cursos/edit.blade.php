@@ -6,8 +6,8 @@
     <h1>en esta pagina podras editar el curso <strong><u>{{$curso->name}}</u></strong></h1>
 
     <form action="{{route('cursos.update',$curso)}}" method="POST">
-        @csrf
-        @method('put')
+        @csrf {{-- agregamos el token que requiere laravel --}}
+        @method('put') {{-- como vamos a actualizar y usamos el metod put en las rutas y aqui tambien lo mandamos a llamar --}}
         <label>Nombre</label>
         <br>
         <input type="text" name="name" value='{{$curso->name}}''>
