@@ -28,6 +28,12 @@ class CursoController extends Controller
     }
 
     public function store(Request $request){
+      //validacion
+      $request->validate([
+        'name'=>'required|max:10',
+        'descripcion'=>'required|min:10',
+        'categoria'=>'required'
+      ]);
       // hacemos una instancia del objeto curso
       $curso = new Curso();
 
@@ -57,6 +63,13 @@ class CursoController extends Controller
                            //Request: es todo lo del formulario
                            //Curso: estainstancia es para consulta el datos en la base de datos
     public function update(Request $request,Curso $curso){
+       //validacion
+       $request->validate([
+        'name'=>'required',
+        'descripcion'=>'required',
+        'categoria'=>'required'
+      ]);
+
       $curso->name = $request->name;
       $curso->descripcion = $request->descripcion;
       $curso->categoria = $request->categoria;
