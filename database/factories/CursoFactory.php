@@ -19,7 +19,8 @@ class CursoFactory extends Factory
         return [
             'name'=>$this->faker->sentence(),
             'descripcion'=>$this->faker->paragraph(),
-            'categoria'=>$this->faker->randomElement(["desarrollo Web","Diseño Web"])
+            'categoria'=>$this->faker->randomElement(["desarrollo Web","Diseño Web"]),
+            'status'=>0
         ];
     }
 }

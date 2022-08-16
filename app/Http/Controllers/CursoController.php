@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Curso;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCurso;
 
 class CursoController extends Controller
 {
@@ -27,23 +28,30 @@ class CursoController extends Controller
        return view('cursos.create');
     }
 
-    public function store(Request $request){
+    public function store(StoreCurso $request){
       //validacion
+      /* 
+      esta validacion como ejemplo se encuentra en Request->StoreCurso
       $request->validate([
         'name'=>'required|max:10',
         'descripcion'=>'required|min:10',
         'categoria'=>'required'
-      ]);
+      ]); */
+
+
       // hacemos una instancia del objeto curso
-      $curso = new Curso();
+      
+     /*se comenta para hacer la asicnacion masiva */
+    /*  $curso = new Curso();
 
       $curso->name = $request->name;
       $curso->descripcion = $request->descripcion;
       $curso->categoria = $request->categoria;
 
-      $curso->save();
+      $curso->save(); */
 
-      return redirect()->route('cursos.show',$curso->id);
+      $curso = Curso::create($request->all());
+      return redirect()->route('cursos.show',$curso);
     }
 
     // para mostrar algo en particular se le llama show
@@ -70,12 +78,13 @@ class CursoController extends Controller
         'categoria'=>'required'
       ]);
 
+      /* editar por asignacion masiva
       $curso->name = $request->name;
       $curso->descripcion = $request->descripcion;
       $curso->categoria = $request->categoria;
 
-      $curso->save();
-
+      $curso->save(); */
+      $curso->update($request->all());
       return redirect()->route('cursos.show',$curso->id);
     }
 }

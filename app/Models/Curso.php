@@ -9,6 +9,8 @@ class Curso extends Model
 {
     use HasFactory;
 
-    /* esta variable nos permite admisntrar la tabla que nosotros con convenga 
-    protected $table = "users";*/
+    /* registro por asignacion masiva
+    protected $fillable = ['name','descripcion','categoria']; */
+
+    protected $guarded = ['status'];
 }
