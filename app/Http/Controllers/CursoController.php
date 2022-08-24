@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Curso;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCurso;
 
@@ -29,6 +30,7 @@ class CursoController extends Controller
     }
 
     public function store(StoreCurso $request){
+      
       //validacion
       /* 
       esta validacion como ejemplo se encuentra en Request->StoreCurso
@@ -38,27 +40,30 @@ class CursoController extends Controller
         'categoria'=>'required'
       ]); */
 
-
+      $slug = Str::slug($request->name,'-');
+      
       // hacemos una instancia del objeto curso
       
      /*se comenta para hacer la asicnacion masiva */
-    /*  $curso = new Curso();
+      $curso = new Curso();
 
       $curso->name = $request->name;
+      $curso->slug = $slug;
       $curso->descripcion = $request->descripcion;
       $curso->categoria = $request->categoria;
 
-      $curso->save(); */
+      $curso->save(); 
 
-      $curso = Curso::create($request->all());
+      /*$curso = Curso::create($request->all());*/
       return redirect()->route('cursos.show',$curso);
     }
 
     // para mostrar algo en particular se le llama show
-    public function show($id){
+    public function show(Curso $curso){
+      
        // return "Bienvenido al curso: $curso";
        // metodo para recuperar un registro por id
-       $curso  = Curso::find($id);
+      //$cursos  = Curso::find($curso);
        return view('cursos.show',compact('curso'));
     }
 
@@ -86,5 +91,11 @@ class CursoController extends Controller
       $curso->save(); */
       $curso->update($request->all());
       return redirect()->route('cursos.show',$curso->id);
+    }
+
+    public function destroy(Curso $curso){
+      $curso->delete();
+
+      return redirect()->route('cursos.index');
     }
 }
