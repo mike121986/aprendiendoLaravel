@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 
 */
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home');
 
 /**
  * pódemos agrupar las rutas para evitar estar llamando el controlador
@@ -33,6 +33,8 @@ Route::get('/', HomeController::class);
      Route::put('cursos/{curso}','update')->name('cursos.update');
      Route::delete('cursos/{curso}','destroy')->name('cursos.destroy');
  });
+
+ Route::view('nosotros','nosotros')->name('nosotros');
 /*
 Route::get('cursos',function(){
     return "bienvenido a la pagia de cursos";

@@ -6,9 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     
+    <style>
+        .active{
+            color:red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     
+    @include('layouts.parties.heders')
     @yield('content')
 </body>
 </html>
